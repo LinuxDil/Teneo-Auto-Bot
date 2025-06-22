@@ -5,7 +5,6 @@ const { HttpsProxyAgent } = require('https-proxy-agent');
 const fs = require('fs');
 const readline = require('readline');
 const keypress = require('keypress');
-const figlet = require('figlet');
 
 let sockets = [];
 let pingIntervals = [];
@@ -172,44 +171,25 @@ async function initialize() {
 function generateBrowserId(index) {
   return `browserId-${index}-${Math.random().toString(36).substring(2, 15)}`;
 }
-// header
+
 function displayHeader() {
   const width = process.stdout.columns;
+  const headerLines = [
+    "<|============================================|>",
+    "                  Teneo Bot                   ",
+    "      https://t.me/AirdropSeeker_Official     ",
+    "<|============================================|>"
+  ];
 
-  figlet.text('Teneo Bot', {
-    font: 'ANSI Shadow',
-    horizontalLayout: 'default',
-    verticalLayout: 'default'
-  }, (err, data) => {
-    if (err) {
-      console.error('Figlet error:', err);
-      return;
-    }
-
-    console.clear();
-
-    const lines = data.split('\n');
-    let maxLength = 0;
-
-    lines.forEach(line => {
-      if (line.length > maxLength) maxLength = line.length;
-    });
-
-    lines.forEach(line => {
-      const padding = Math.max(0, Math.floor((width - line.length) / 2));
-      console.log(chalk.green(' '.repeat(padding) + line));
-    });
-
-    const subtitle = 'https://t.me/airdropseeker_official';
-    const subtitlePadding = Math.max(0, Math.floor((width - maxLength) / 2) + Math.floor((maxLength - subtitle.length) / 2));
-    console.log(chalk.gray(' '.repeat(subtitlePadding) + subtitle));
-
-    console.log(""); // spacing
-
-    const instructions = "Use 'A' to switch to the previous account, 'D' to switch to the next account, 'C' to exit.";
-    const instructionsPadding = Math.max(0, Math.floor((width - instructions.length) / 2));
-    console.log(chalk.cyan(' '.repeat(instructionsPadding) + instructions));
+  console.log("");
+  headerLines.forEach(line => {
+    const padding = Math.max(0, Math.floor((width - line.length) / 2));
+    console.log(chalk.green(' '.repeat(padding) + line));
   });
+  console.log("");
+  const instructions = "Use 'A' to switch to the previous account, 'D' to switch to the next account, 'C' to exit.";
+  const instructionsPadding = Math.max(0, Math.floor((width - instructions.length) / 2));
+  console.log(chalk.cyan(' '.repeat(instructionsPadding) + instructions));
 }
 
 function displayAccountData(index) {
