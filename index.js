@@ -65,7 +65,7 @@ function loadBearerTokens() {
 
 function loadProxies() {
   if (!fs.existsSync('proxy.txt')) {
-    console.error('proxy.txt not found. Please add the file with proxy data.');
+    console.error('proxy.txt not found. Please add the file with proxy data!.');
     process.exit(1);
   }
 
